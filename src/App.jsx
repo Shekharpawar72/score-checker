@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 import ResumeScoreChecker from './components/ResumeScoreChecker'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AIInterviewForm from './components/AIInterviewForm';
+import AIInterviewRules from './components/AIInterviewRules';
 
 function App() {
   return (
@@ -56,6 +59,14 @@ function App() {
           </header>
           
           <ResumeScoreChecker />
+          
+ <Router>
+      <Routes>
+    
+        <Route path="/" element={<AIInterviewForm />} />
+            <Route path="/rules" element={<AIInterviewRules />} />
+      </Routes>
+    </Router>
         </div>
       </div>
     </div>
@@ -63,3 +74,4 @@ function App() {
 }
 
 export default App
+  
