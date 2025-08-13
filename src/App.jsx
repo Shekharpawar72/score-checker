@@ -4,6 +4,8 @@ import ResumeScoreChecker from './components/ResumeScoreChecker'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AIInterviewForm from './components/AIInterviewForm';
 import AIInterviewRules from './components/AIInterviewRules';
+import InterviewPanel from './components/InterviewPanel';
+import interimResults from './components/InterviewResult';
 
 function App() {
   return (
@@ -65,6 +67,8 @@ function App() {
     
         <Route path="/" element={<AIInterviewForm />} />
             <Route path="/rules" element={<AIInterviewRules />} />
+            <Route path="/interview" element={<InterviewPanel />} />
+            <Route path="/results" element={<interimResults />} />
       </Routes>
     </Router>
         </div>

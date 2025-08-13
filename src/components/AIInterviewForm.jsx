@@ -50,8 +50,6 @@ export default function AIInterviewForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -135,7 +133,7 @@ export default function AIInterviewForm() {
             )}
           </div>
 
-          <div>
+          {/* <div>
             <label htmlFor="difficulty" className="block font-medium mb-1">
               Difficulty Level
             </label>
@@ -149,9 +147,38 @@ export default function AIInterviewForm() {
             {errors.difficulty && (
               <p className="text-red-400 text-sm mt-1">{errors.difficulty}</p>
             )}
-          </div>
 
-          <div>
+          
+          </div> */}
+
+          
+
+               <div>
+  <label htmlFor="difficulty" className="block font-medium mb-1">
+    Difficulty Level
+  </label>
+  <select
+    id="difficulty"
+    value={formData.difficulty}
+    onChange={handleChange}
+    className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
+  >
+    <option value="">Select Difficulty</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+  </select>
+  {errors.difficulty && (
+    <p className="text-red-400 text-sm mt-1">{errors.difficulty}</p>
+  )}
+</div>
+
+
+
+
+
+
+          {/* <div>
             <label htmlFor="duration" className="block font-medium mb-1">
               Interview Duration
             </label>
@@ -165,7 +192,31 @@ export default function AIInterviewForm() {
             {errors.duration && (
               <p className="text-red-400 text-sm mt-1">{errors.duration}</p>
             )}
-          </div>
+          </div> */}
+
+               <div>
+  <label htmlFor="duration" className="block font-medium mb-1">
+    Interview Duration
+  </label>
+  <select
+    id="duration"
+    value={formData.duration}
+    onChange={handleChange}
+    className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
+  >
+    <option value="">Select Duration</option>
+    <option value="15 minutes">15 minutes</option>
+    <option value="30 minutes">30 minutes</option>
+    <option value="45 minutes">45 minutes</option>
+    <option value="60 minutes">60 minutes</option>
+  </select>
+  {errors.duration && (
+    <p className="text-red-400 text-sm mt-1">{errors.duration}</p>
+  )}
+</div>
+
+
+
         </div>
 
         <div>
@@ -186,7 +237,7 @@ export default function AIInterviewForm() {
         </div>
 
         {/* ya mane comment out kr diya ha yr thik ha  */}
-         <div
+        <div
           onDrop={handleFileDrop}
           onDragOver={(e) => e.preventDefault()}
           className={`mt-6 p-6 border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition-colors ${
@@ -214,7 +265,7 @@ export default function AIInterviewForm() {
           {errors.resume && (
             <p className="text-red-400 text-sm mt-2">{errors.resume}</p>
           )}
-        </div> 
+        </div>
 
         <div className="flex justify-center">
           <button
@@ -228,24 +279,6 @@ export default function AIInterviewForm() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { useNavigate } from "react-router-dom";
 // import React, { useState } from "react";

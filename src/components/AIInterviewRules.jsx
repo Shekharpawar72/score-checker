@@ -1,23 +1,28 @@
+
+
+
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AIInterviewRules() {
   const videoRef = useRef(null);
   const [cameraAllowed, setCameraAllowed] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [interviewStarted, setInterviewStarted] = useState(false);
+  const navigate = useNavigate();
 
   const rules = [
-    "Camera Access – Candidates must keep their webcam turned on for the entire interview.",
-    "Microphone Access – Microphone must remain active to record responses clearly.",
-    "Stable Internet – Ensure a reliable internet connection to avoid interruptions.",
-    "Device Requirement – Use a laptop or desktop; mobile devices may be restricted unless allowed.",
-    "Quiet Location – Choose a distraction-free place with minimal background noise.",
-    "Good Lighting – Ensure your face is clearly visible to the camera.",
-    "No Background Movements – Avoid people moving in the background during the interview.",
-    "No Switching Tabs/Apps – The system may detect and flag attempts to switch to other windows or applications.",
-    "No External Help – You must not use any notes, phones, or external devices for assistance.",
-    "No Unauthorized Communication – Do not chat, call, or message anyone during the interview.",
-    "Face Visibility – Your face must remain visible in the frame throughout the session."
+    "Camera must be on throughout the interview.",
+    "Microphone should remain active for clear responses.",
+    "Ensure stable internet connection.",
+    "Use a laptop or desktop device.",
+    "Choose a quiet, distraction-free location.",
+    "Make sure your face is clearly visible.",
+    "Avoid background movements.",
+    "Do not switch tabs or applications.",
+    "No external help or devices allowed.",
+    "No chatting, calling, or messaging.",
+    "Keep your face in the camera frame."
   ];
 
   const requestCameraAndMic = async () => {
@@ -27,19 +32,22 @@ export default function AIInterviewRules() {
         videoRef.current.srcObject = stream;
       }
       setCameraAllowed(true);
-    } catch (err) {
+    } catch {
       alert("Camera and microphone access is required to proceed.");
       setCameraAllowed(false);
     }
   };
 
   const startInterview = () => {
-    if (inputValue.trim().toLowerCase() === "start" && cameraAllowed) {
-      setInterviewStarted(true);
-    } else if (!cameraAllowed) {
+    if (!cameraAllowed) {
       alert("Please allow camera and microphone access first.");
+      return;
+    }
+    if (inputValue.trim().toLowerCase() === "start") {
+      setInterviewStarted(true);
+      navigate("/interview");
     } else {
-      alert('Please type "start" in the box to begin.');
+      alert("Please type 'start' in the box to begin.");
     }
   };
 
@@ -48,45 +56,60 @@ export default function AIInterviewRules() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 flex flex-col items-center relative">
-      {/* Camera Preview */}
-      {cameraAllowed && (
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className="fixed top-4 right-4 w-40 h-28 rounded-lg border-2 border-gray-300 shadow-lg object-cover"
-        />
-      )}
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6 flex items-center justify-center">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl gap-6">
 
-      <div className="max-w-3xl w-full bg-white rounded-xl shadow-lg p-6">
-        <h1 className="text-2xl font-bold text-center mb-4">AI Interview Rules & Regulations</h1>
-        <ul className="list-disc pl-6 space-y-2 text-gray-700">
-          {rules.map((rule, index) => (
-            <li key={index}>{rule}</li>
-          ))}
-        </ul>
+        {/* Rules Section */}
+        <div className="flex-1 bg-white rounded-2xl shadow-lg p-10 flex flex-col justify-between">
+          <div>
+            <h1 className="text-3xl font-extrabold text-gray-800 mb-4">Interview Rules</h1>
+            <ul className="list-disc pl-6 space-y-2 text-gray-700">
+              {rules.map((rule, index) => (
+                <li key={index} className="leading-relaxed">{rule}</li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center">
-          <input
-            type="text"
-            placeholder="Type 'start' to begin interview"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="flex-1 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <button
-            onClick={startInterview}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-          >
-            Start Interview
-          </button>
+          {/* Input Box + Start Button */}
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="Type 'start' to begin interview"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              className="flex-1 border text-gray-600 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              onClick={startInterview}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition"
+            >
+              Start Interview
+            </button>
+          </div>
+
+          {interviewStarted && (
+            <p className="mt-4 text-green-600 font-semibold animate-pulse">
+              Redirecting to interview...
+            </p>
+          )}
         </div>
 
-        {interviewStarted && (
-          <p className="mt-4 text-green-600 font-semibold">Interview has started!</p>
-        )}
+        {/* Camera Preview */}
+        <div className="lg:w-1/3 bg-white rounded-2xl shadow-lg p-4 flex items-center justify-center">
+          {cameraAllowed ? (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="w-full h-80 rounded-xl border border-gray-300 object-cover shadow-md"
+            />
+          ) : (
+            <p className="text-gray-500 text-center px-4">
+              Please allow camera & microphone access to continue.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
