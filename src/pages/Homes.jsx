@@ -5,6 +5,13 @@ import Navbar from "../components/custom/Navbar";
 import HowItWork from "../components/custom/HowItWork";
 import { gsap } from "gsap";
 
+// import ResumeChecker from "../pages/ResumeChecker";
+import ResumeChecker from "./Resumechecker";
+
+
+
+
+
 
 
 const Homes = () => {
@@ -61,7 +68,7 @@ const Homes = () => {
 
   }, []);
 
-
+ 
   return (
     <div  className="min-h-screen bg-gradient-to-r from-[#0b0f14] via-[#0b0f14] to-[#0a0e14] text-white overflow-x-hidden">
       {/* Navbar component  bg-gradient-to-br from-[#091527] to-[#020911]  */}
@@ -83,7 +90,7 @@ const Homes = () => {
           {/* Heading */}
           <h1 className="text-4xl sm:text-8xl md:text-8xl font-semibold mt-6 leading-tight">
             {/* AI for Every Developer */}
-            Prepare For Your Dream Job
+            Prepare For Your Dream  <span className="text-blue-500">Job</span>
           </h1>
 
           {/* Description */}
@@ -92,10 +99,18 @@ const Homes = () => {
             instant feedback, and helps you track your progress for success.
           </p>
 
-          {/* Button */}
-          <button className="mt-8 px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg transition-transform transform hover:scale-105">
+          
+          {/* <button className="mt-8 px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg transition-transform transform hover:scale-105">
             Get Started
-          </button>
+          </button> */}
+          <button 
+              className="mt-6 px-6 py-3 bg-blue-600 text-white 
+                hover:bg-white hover:text-blue-600
+                border border-blue-600 
+                transition rounded-3xl font-medium"
+            >
+              Get Started
+            </button>
         </div>
 
         {/* RIGHT — GLOW PANEL */}
@@ -135,7 +150,44 @@ const Homes = () => {
         </div>
       </div>
       {/* How It Works Section */}
+     
       <HowItWork />
+     
+      {/* Interview Session Component */}
+
+
+
+
+            {/* <div className=" text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition text-center">
+
+  <h3 className="text-5xl font-extrabold">ATS-Ready Resume in <span className="text-blue-500"> Minutes</span></h3>
+
+  
+  <p className="mt-3 text-gray-400 text-shadow-2xs">
+    Scan your resume and get actionable suggestions to make it recruiter-friendly.
+  </p>
+
+ 
+</div> */}
+
+<div className="mt-16 text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition text-center">
+  {/* Title */}
+  <h3 className="text-5xl font-extrabold">
+    ATS-Ready Resume in <span className="text-blue-500">Minutes</span>
+  </h3>
+
+  {/* Description */}
+  <p className="mt-3 text-gray-400 text-shadow-2xs">
+    Scan your resume and get actionable suggestions to make it recruiter-friendly.
+  </p>
+</div>
+
+
+
+      
+      {/* this the Resume checker page  */}
+       <ResumeChecker />
+
     </div>
   );
 

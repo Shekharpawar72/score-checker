@@ -179,3 +179,36 @@
 //     </div>
 //   );
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {/* <div className="bg-[#151a23]/90 border border-blue-900 rounded-2xl px-8 py-18 shadow-xl shadow-blue-700/20 flex flex-col items-center text-center md:min-w-[320px] min-w-0 hover:scale-105 hover:shadow-blue-400/40 transition-all duration-300 relative">
+              <div className="absolute -top-10 left-1/2 -translate-x-1/2 md:static md:top-0 md:left-0 md:translate-x-0 mb-3">
+                {step.icon}
+              </div>
+              <h3 className="text-lg md:text-xl font-bold mb-3">{step.title}</h3>
+              <p className="text-gray-300 text-base">{step.description}</p>
+            </div> */}
+
+                    {/* <div className="relative bg-[#151a23]/90 border border-blue-900 rounded-2xl px-8 pt-14 pb-10 shadow-xl shadow-blue-700/20 flex flex-col items-center text-center md:min-w-[320px] min-w-0 hover:scale-105 hover:shadow-blue-400/40 transition-all duration-300 overflow-visible">
+  
+  <div className="mb-3 md:mb-0 md:absolute md:-top-8 md:left-1/2 md:-translate-x-1/2">
+    <div className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-[#141822] rounded-full shadow-lg">
+      {step.icon}
+    </div>
+  </div>
+
+  <h3 className="text-lg md:text-xl font-bold mb-3">{step.title}</h3>
+  <p className="text-gray-300 text-base">{step.description}</p>
+</div> */}

@@ -112,7 +112,7 @@ export default function InterviewPanel() {
 
     const handleLeave = () => {
         const score = Math.floor(Math.random() * 100); // Placeholder
-        navigate("/interimResult", { state: { score } });
+        navigate("/interim-results", { state: { score } });
     };
 
     return (

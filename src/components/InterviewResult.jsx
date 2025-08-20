@@ -27,7 +27,7 @@ export default function InterviewResult() {
             Back to Home
           </button>
           <button
-            onClick={() => navigate("/interview")}
+            onClick={() => navigate("/ai-interview-form")}
             className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600"
           >
             Retry Interview

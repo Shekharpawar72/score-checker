@@ -45,7 +45,7 @@ export default function AIInterviewRules() {
     }
     if (inputValue.trim().toLowerCase() === "start") {
       setInterviewStarted(true);
-      navigate("/interview");
+      navigate("/interview-panel"); // Redirect to interview panel
     } else {
       alert("Please type 'start' in the box to begin.");
     }
