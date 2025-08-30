@@ -206,3 +206,6 @@ const ResumeScoreChecker = () => {
 };
 
 export default ResumeScoreChecker;
+
+
+

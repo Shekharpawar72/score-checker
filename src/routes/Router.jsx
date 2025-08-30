@@ -8,7 +8,8 @@ import InterimResults from "../components/InterviewResult";
 
 import AuthContainer from "../pages/AuthContainer";
 import ResumeScoreChecker from "../components/ResumeScoreChecker";
-
+import GetSuggestionsCard from "../components/GetSuggestionsCard";
+import ResumeOptimazationTip  from"../components/ResumeOptimazationTip";
 
 // import Home from "../pages/Home";
 
@@ -28,7 +29,11 @@ export default function AppRouter() {
         <Route path="/practice" element={<AIInterviewForm />} />
 
   <Route path="/resume-score-checker" element={<ResumeScoreChecker />} />
-
+   <Route path="/suggestions" element={<GetSuggestionsCard />} />
+   <Route path="/resume-optimization-tips" element={<ResumeOptimazationTip />} />
+   <Route path="/ats" element={<ResumeScoreChecker />} /> 
+   
+ 
 
         {/* <Route path="/" element={<Home />} />
       <Route path="/signup" element={<Signup />} />

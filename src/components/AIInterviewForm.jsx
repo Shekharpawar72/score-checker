@@ -2,6 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 import React, { useState } from "react";
 import { CloudUpload } from "lucide-react";
+import TravelingLine from "../components/custom/TravelingLine";
+
+
+
+
+
+
 
 export default function AIInterviewForm() {
   const navigate = useNavigate(); // ✅ hook for navigation
@@ -60,26 +67,18 @@ export default function AIInterviewForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 flex justify-center items-center">
+    <div className="min-h-screen bg-gradient-to-r from-[#0b0f14] via-[#0b0f14] to-[#0a0e14] text-white p-6 flex justify-center items-center">
+      <TravelingLine />
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-3xl space-y-6"
-      >
-        <h2 className="text-3xl font-bold text-center">
-          AI Interview Experience Form
+        className=" bg-[#111827] p-8 rounded-2xl shadow-2xl w-full max-w-3xl space-y-6"
+      > 
+        <h2 className="text-3xl font-bold text-center text-white">     
+          {/* isme lien change ha thoda  <span className="text-blue-500">Screening</span> */}
+          AI Interview  <span className="text-blue-500">Screening</span> Form   
         </h2>
 
-        {/* <div>
-          <label htmlFor="company" className="block font-medium mb-1">Company Description</label>
-          <textarea
-            id="company"
-            value={formData.company}
-            onChange={handleChange}
-            placeholder="Describe the company..."
-            className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
-          />
-          {errors.company && <p className="text-red-400 text-sm mt-1">{errors.company}</p>}
-        </div> */}
+       
 
         <div>
           <label htmlFor="company" className="block font-medium mb-1">
@@ -91,7 +90,7 @@ export default function AIInterviewForm() {
             value={formData.company}
             onChange={handleChange}
             placeholder="Describe the company..."
-            className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2 resize-none overflow-y-auto"
+            className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500 w-full rounded-lg p-2 resize-none overflow-y-auto"
           />
           {errors.company && (
             <p className="text-red-400 text-sm mt-1">{errors.company}</p>
@@ -108,7 +107,7 @@ export default function AIInterviewForm() {
               value={formData.role}
               onChange={handleChange}
               placeholder="Frontend Developer, Backend Engineer, etc."
-              className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
+              className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500 w-full rounded-lg p-2"
             />
             {errors.role && (
               <p className="text-red-400 text-sm mt-1">{errors.role}</p>
@@ -126,30 +125,14 @@ export default function AIInterviewForm() {
               value={formData.experience}
               onChange={handleChange}
               placeholder="e.g., 2"
-              className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
+              className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500 w-full rounded-lg p-2"
             />
             {errors.experience && (
               <p className="text-red-400 text-sm mt-1">{errors.experience}</p>
             )}
           </div>
 
-          {/* <div>
-            <label htmlFor="difficulty" className="block font-medium mb-1">
-              Difficulty Level
-            </label>
-            <input
-              id="difficulty"
-              value={formData.difficulty}
-              onChange={handleChange}
-              placeholder="Easy, Medium, Hard"
-              className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
-            />
-            {errors.difficulty && (
-              <p className="text-red-400 text-sm mt-1">{errors.difficulty}</p>
-            )}
-
           
-          </div> */}
 
           
 
@@ -161,7 +144,7 @@ export default function AIInterviewForm() {
     id="difficulty"
     value={formData.difficulty}
     onChange={handleChange}
-    className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
+    className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500 w-full rounded-lg p-2"
   >
     <option value="">Select Difficulty</option>
     <option value="Easy">Easy</option>
@@ -178,22 +161,6 @@ export default function AIInterviewForm() {
 
 
 
-          {/* <div>
-            <label htmlFor="duration" className="block font-medium mb-1">
-              Interview Duration
-            </label>
-            <input
-              id="duration"
-              value={formData.duration}
-              onChange={handleChange}
-              placeholder="e.g., 45 minutes"
-              className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
-            />
-            {errors.duration && (
-              <p className="text-red-400 text-sm mt-1">{errors.duration}</p>
-            )}
-          </div> */}
-
                <div>
   <label htmlFor="duration" className="block font-medium mb-1">
     Interview Duration
@@ -202,7 +169,7 @@ export default function AIInterviewForm() {
     id="duration"
     value={formData.duration}
     onChange={handleChange}
-    className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2"
+    className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500 w-full rounded-lg p-2"
   >
     <option value="">Select Duration</option>
     <option value="15 minutes">15 minutes</option>
@@ -229,24 +196,24 @@ export default function AIInterviewForm() {
             value={formData.techstack}
             onChange={handleChange}
             placeholder="React, Node.js, Java, etc."
-            className="mt-1 bg-gray-700 border-none text-white focus:ring-2 focus:ring-purple-500 w-full rounded-lg p-2 resize-none overflow-y-auto"
+            className="mt-1 bg-gray-700 border-none text-white focus:ring-2  hover:border-blue-500 w-full rounded-lg p-2 resize-none overflow-y-auto"
           />
           {errors.techstack && (
             <p className="text-red-400 text-sm mt-1">{errors.techstack}</p>
           )}
         </div>
 
-        {/* ya mane comment out kr diya ha yr thik ha  */}
+       
         <div
           onDrop={handleFileDrop}
           onDragOver={(e) => e.preventDefault()}
           className={`mt-6 p-6 border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition-colors ${
             resume
               ? "border-green-400 bg-green-900/20"
-              : "border-gray-600 hover:border-purple-500"
+              : "border-gray-600 hover:border-blue-500"
           }`}
         >
-          <CloudUpload className="h-12 w-12 text-purple-400" />
+          <CloudUpload className="h-12 w-12 text-blue-500" />
           <p className="mt-2 text-sm">
             Drag & drop your resume/CV here or click to upload
           </p>
@@ -258,7 +225,7 @@ export default function AIInterviewForm() {
           />
           <label
             htmlFor="resume-upload"
-            className="cursor-pointer mt-2 text-purple-300 underline"
+            className="cursor-pointer mt-2 text-blue-500 underline"
           >
             {resume ? resume.name : "Browse Files"}
           </label>
@@ -270,7 +237,11 @@ export default function AIInterviewForm() {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-[260px] flex justify-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition-colors"
+            // className="w-[260px] flex justify-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition-colors"
+            className="mt-6 px-15 py-3 bg-blue-600 text-white 
+                hover:bg-white hover:text-blue-600
+                border border-blue-600 
+                transition rounded-3xl font-medium"
           >
             Submit
           </button>

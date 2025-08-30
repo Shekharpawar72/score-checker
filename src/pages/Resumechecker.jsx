@@ -8,10 +8,12 @@ import cardImage2 from "../assets/card-2.svg"; // replace with your actual image
 import { useNavigate } from "react-router-dom";
 import ResumeScoreChecker from "../components/ResumeScoreChecker";
 
+
 export default function ATSMainSection() {
      const navigate = useNavigate();
   return (
     <div className="bg-gradient-to-r from-[#0b0f14] via-[#0b0f14] to-[#0a0e14] min-h-screen flex items-center justify-center  px-6 py-12">
+    
       <div className="max-w-6xl w-full bg-[#111827] rounded-3xl p-8 lg:p-12 text-white shadow-2xl shadow-blue-700 backdrop-blur-md ">
         {/* Header Section */}
         <div className="lg:flex lg:items-center lg:justify-between">
@@ -67,7 +69,8 @@ export default function ATSMainSection() {
               <p className="text-gray-400 mt-2 text-sm">
            Get AI-powered suggestions to make your resume job-specific.
               </p>
-              <button className="mt-4 px-4 py-2 bg-[#1F2937] hover:bg-white hover:text-blue-600 border border-blue-600 transition rounded-lg text-sm font-medium">
+              <button  onClick={() => navigate("/suggestions")}
+               className="mt-4 px-4 py-2 bg-[#1F2937] hover:bg-white hover:text-blue-600 border border-blue-600 transition rounded-lg text-sm font-medium">
                 Get Suggestions
               </button>
             </div>
@@ -94,13 +97,15 @@ export default function ATSMainSection() {
                 Get suggestions to improve formatting, fix structure issues, and
                 raise your ATS score.
               </p>
-              <button className="mt-4 px-4 py-2 bg-[#1F2937] hover:bg-white hover:text-blue-600 border border-blue-600 transition rounded-lg text-sm font-medium">
+              <button  onClick={() => navigate("/resume-optimization-tips")}
+               className="mt-4 px-4 py-2 bg-[#1F2937] hover:bg-white hover:text-blue-600 border border-blue-600 transition rounded-lg text-sm font-medium">
                 View Tips
               </button>
             </div>
           </div>
         </div>
       </div>
+        
     </div>
   );
 }
