@@ -1,0 +1,40 @@
+.box {
+  position: absolute;
+  bottom: -120px;
+  width: 60px;   /* Initial small size */
+  height: 60px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  animation: floatUp 10s linear infinite;
+}
+
+/* Different positions, delays */
+.box-1 { left: 5%; animation-delay: 0s;  }
+.box-2 { left: 15%; animation-delay: 2s; }
+.box-3 { left: 25%; animation-delay: 4s; }
+.box-4 { left: 35%; animation-delay: 1s; }
+.box-5 { left: 45%; animation-delay: 3s; }
+.box-6 { left: 55%; animation-delay: 5s; }
+.box-7 { left: 65%; animation-delay: 6s; }
+.box-8 { left: 75%; animation-delay: 7s; }
+.box-9 { left: 85%; animation-delay: 4.5s; }
+.box-10 { left: 95%; animation-delay: 2.5s; }
+.box-11 { left: 50%; animation-delay: 1.5s; }
+.box-12 { left: 70%; animation-delay: 3.5s; }
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5);  /* Start small */
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1); /* Medium size */
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5); /* Bigger at top */
+    opacity: 0;
+  }
+}
+
+

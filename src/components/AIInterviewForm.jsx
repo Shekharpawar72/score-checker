@@ -10,6 +10,7 @@ import TravelingLine from "../components/custom/TravelingLine";
 
 
 
+
 export default function AIInterviewForm() {
   const navigate = useNavigate(); // ✅ hook for navigation
 
@@ -68,16 +69,21 @@ export default function AIInterviewForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#0b0f14] via-[#0b0f14] to-[#0a0e14] text-white p-6 flex justify-center items-center">
-      <TravelingLine />
+      {/* <TravelingLine /> */}
+        <TravelingLine />
+ 
+        
       <form
         onSubmit={handleSubmit}
         className=" bg-[#111827] p-8 rounded-2xl shadow-2xl w-full max-w-3xl space-y-6"
       > 
+
+      
         <h2 className="text-3xl font-bold text-center text-white">     
           {/* isme lien change ha thoda  <span className="text-blue-500">Screening</span> */}
           AI Interview  <span className="text-blue-500">Screening</span> Form   
         </h2>
-
+      
        
 
         <div>
@@ -246,7 +252,11 @@ export default function AIInterviewForm() {
             Submit
           </button>
         </div>
+               
+        
       </form>
+      
+      
     </div>
   );
 }
