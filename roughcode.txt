@@ -398,3 +398,26 @@
 // };
 
 // export default Homes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div key={index} className={max-w-xs p-3 rounded-lg ${ msg.sender === "me" ? "ml-auto bg-blue-500 text-white border-2 border-gray-400 shadow-2xl" : "bg-gray-200 text-gray-900" }} > <p className="text-xs font-semibold mb-1"> {msg.sender === "me" ? "You" : "AI Agent"} </p> {msg.text.split("\n").map((line, i) => ( <p key={i}>{line}</p> ))} </div>
