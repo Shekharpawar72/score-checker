@@ -75,7 +75,7 @@ import AppRouter from "./routes/Router";
 
 function App() {
   return (
-    <div className="h-screen bg-black">
+    <div className="">
       <Router>
         <AppRouter />
       </Router>

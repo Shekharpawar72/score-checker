@@ -5,202 +5,214 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PhoneOff } from "lucide-react";
+import interviewPanel from "../assets/interviewPanel.mp4"; 
 
 export default function InterviewPanel() {
-    const navigate = useNavigate();
-    const [messages, setMessages] = useState([]);
-    const [input, setInput] = useState("");
-    const [timeLeft, setTimeLeft] = useState(60 * 5);
-    const [listening, setListening] = useState(false);
-    const recognitionRef = useRef(null);
-    const userVideoRef = useRef(null);
+  const navigate = useNavigate();
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [timeLeft, setTimeLeft] = useState(60 * 5);
+  const [listening, setListening] = useState(false);
+  const recognitionRef = useRef(null);
+  const userVideoRef = useRef(null);
+  
+  // Create a ref for the chat message container
+  const messagesContainerRef = useRef(null);
 
-    // Fetch first question from backend on mount
-    useEffect(() => {
-        fetch("/api/getFirstQuestion") // Replace with your backend API
-            .then((res) => res.json())
-            .then((data) => {
-                setMessages([{ sender: "ai", text: data.question }]);
-            })
-            .catch((err) => console.error(err));
-    }, []);
+  // Auto-scroll to the bottom whenever a new message is added
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
 
-    // Camera access
-    useEffect(() => {
-        navigator.mediaDevices
-            .getUserMedia({ video: true, audio: false })
-            .then((stream) => {
-                if (userVideoRef.current) userVideoRef.current.srcObject = stream;
-            })
-            .catch(() => alert("Please allow camera access."));
-    }, []);
+  // Fetch first question from backend on mount
+  useEffect(() => {
+    fetch("/api/getFirstQuestion") // Replace with your backend API
+      .then((res) => res.json())
+      .then((data) => {
+        setMessages([{ sender: "ai", text: data.question }]);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
-    // Countdown timer
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
+  // Camera access
+  useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: false })
+      .then((stream) => {
+        if (userVideoRef.current) userVideoRef.current.srcObject = stream;
+      })
+      .catch(() => alert("Please allow camera access."));
+  }, []);
 
-    const formatTime = (seconds) => {
-        const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
-        const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-        const s = String(seconds % 60).padStart(2, "0");
-        return { h, m, s };
-    };
+  // Countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-    const { h, m, s } = formatTime(timeLeft);
+  const formatTime = (seconds) => {
+    const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
+    const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
+    return { h, m, s };
+  };
 
-    const sendMessage = () => {
-        if (!input.trim()) return;
+  const { h, m, s } = formatTime(timeLeft);
 
-        // Add user's message
-        setMessages((prev) => [...prev, { sender: "me", text: input }]);
+  const sendMessage = () => {
+    if (!input.trim()) return;
 
-        // Send to backend and get next AI question
-        fetch("/api/sendAnswer", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ answer: input }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setMessages((prev) => [
-                    ...prev,
-                    { sender: "ai", text: data.nextQuestion },
-                ]);
-            })
-            .catch((err) => console.error(err));
+    // Add user's message
+    setMessages((prev) => [...prev, { sender: "me", text: input }]);
 
-        setInput("");
-    };
+    // Send to backend and get next AI question
+    fetch("/api/sendAnswer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ answer: input }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessages((prev) => [
+          ...prev,
+          { sender: "ai", text: data.nextQuestion },
+        ]);
+      })
+      .catch((err) => console.error(err));
 
-    const startListening = () => {
-        if (!("webkitSpeechRecognition" in window)) {
-            alert("Speech recognition not supported in this browser.");
-            return;
-        }
+    setInput("");
+  };
 
-        if (!recognitionRef.current) {
-            const SpeechRecognition =
-                window.SpeechRecognition || window.webkitSpeechRecognition;
-            recognitionRef.current = new SpeechRecognition();
-            recognitionRef.current.lang = "en-US";
-            recognitionRef.current.interimResults = true;
+  const startListening = () => {
+    if (!("webkitSpeechRecognition" in window)) {
+      alert("Speech recognition not supported in this browser.");
+      return;
+    }
 
-            recognitionRef.current.onresult = (event) => {
-                const transcript = Array.from(event.results)
-                    .map((result) => result[0].transcript)
-                    .join("");
-                setInput(transcript);
-            };
+    if (!recognitionRef.current) {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.lang = "en-US";
+      recognitionRef.current.interimResults = true;
 
-            recognitionRef.current.onend = () => {
-                setListening(false);
-            };
-        }
+      recognitionRef.current.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map((result) => result[0].transcript)
+          .join("");
+        setInput(transcript);
+      };
 
-        if (!listening) {
-            setListening(true);
-            recognitionRef.current.start();
-        } else {
-            recognitionRef.current.stop();
-            setListening(false);
-        }
-    };
+      recognitionRef.current.onend = () => {
+        setListening(false);
+      };
+    }
 
-    const handleLeave = () => {
-        const score = Math.floor(Math.random() * 100); // Placeholder
-        navigate("/interim-results", { state: { score } });
-    };
+    if (!listening) {
+      setListening(true);
+      recognitionRef.current.start();
+    } else {
+      recognitionRef.current.stop();
+      setListening(false);
+    }
+  };
 
-    return (
-        <div className="min-h-screen bg-gray-100 p-4 flex flex-col md:flex-row gap-4">
-            {/* Chat Section */}
-            <div className="flex-4 bg-white rounded-xl shadow-lg flex flex-col">
-                <div className="flex-1 p-4 overflow-y-auto space-y-4">
-                    {messages.map((msg, index) => (
-                        <div
-                            key={index}
-                            className={`max-w-xs p-3 rounded-lg ${msg.sender === "me"
-                                ? "ml-auto bg-blue-300 text-white border-2 border-gray-400 shadow-2xl"
-                                : "bg-gray-200 text-gray-900"
-                                }`}
-                        >
-                            <p className="text-xs font-semibold mb-1">
-                                {msg.sender === "me" ? "You" : "AI Agent"}
-                            </p>
-                            {msg.text.split("\n").map((line, i) => (
-                                <p key={i}>{line}</p>
-                            ))}
-                        </div>
-                    ))}
-                </div>
+  const handleLeave = () => {
+    const score = Math.floor(Math.random() * 100); // Placeholder
+    navigate("/interim-results", { state: { score } });
+  };
 
-                {/* Input */}
-                <div className="p-3 border-t flex gap-2 items-center">
-                    <input
-                        type="text"
-                        placeholder="Write your message or use mic..."
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        className="flex-1 text-gray-600 border rounded-lg p-2 focus:outline-none"
-                    />
-                    <button
-                        onClick={startListening}
-                        className={`px-3 py-2 rounded-full ${listening ? "bg-red-500 text-white" : "bg-gray-300"
-                            }`}
-                        title="Click to speak"
-                    >
-                        🎤
-                    </button>
-                    <button
-                        onClick={sendMessage}
-                        className="bg-green-500 text-white px-4 rounded-lg hover:bg-green-600"
-                    >
-                        Send
-                    </button>
-                </div>
+  return (
+    <div className="h-[100vh] bg-gradient-to-r from-[#0b0f14] via-[#0b0f14] to-[#0a0e14] p-3 flex flex-col md:flex-row gap-4">
+      {/* Chat Section */}
+      <div className="flex-4  bg-[#101536] rounded-xl shadow-lg flex flex-col">
+        {/* Attach the ref to this div */}
+        <div 
+          ref={messagesContainerRef}
+          className="flex-1 p-4 overflow-y-auto space-y-4"
+        >
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`max-w-xs p-3 rounded-lg ${msg.sender === "me"
+                ? "ml-auto bg-[#0A84FF] text-white   shadow-2xl"
+                : "bg-gray-200 text-white"
+                }`}
+            >
+              <p className="text-xs font-semibold mb-1">
+                {msg.sender === "me" ? "You" : "AI Agent"}
+              </p>
+              {msg.text.split("\n").map((line, i) => (
+                <p key={i}>{line}</p>
+              ))}
             </div>
-
-            {/* Right Panel */}
-            <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-4 flex flex-col items-center gap-4">
-                <div className="text-lg font-bold text-gray-900">
-                    Time Left:{" "}
-                    <span className="ml-2 text-blue-600">
-                        {h}:{m}:{s}
-                    </span>
-                </div>
-
-                <div className="flex flex-col gap-6 w-full items-center mt-20">
-                    <video
-                        ref={userVideoRef}
-                        autoPlay
-                        playsInline
-                        muted
-                        className="w-76 h-54 object-cover rounded-lg border"
-                    />
-                    <video
-                        src="https://www.w3schools.com/html/mov_bbb.mp4"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-76 h-54  object-cover rounded-lg border"
-                    />
-                </div>
-
-
-
-
-                <button
-                    onClick={handleLeave}
-                    className="flex items-center bg-[#C64C4C] hover:bg-[#b84343] text-white px-3 py-1 rounded-md mt-32">
-                    <PhoneOff size={16} className="mr-1" />
-                    Leave
-                </button>
-            </div>
+          ))}
         </div>
-    );
+
+        {/* Input */}
+        <div className="p-3 border-t flex gap-2 items-center">
+          <input
+            type="text"
+            placeholder="Write your message or use mic..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="flex-1 text-white border  rounded-lg p-2 focus:outline-none"
+          />
+          <button
+            onClick={startListening}
+            className={`px-3 py-2 rounded-full ${listening ? "bg-red-500 text-white" : "bg-white"
+              }`}
+            title="Click to speak"
+          >
+            🎤
+          </button>
+          <button
+            onClick={sendMessage}
+            className="bg-green-500 text-white px-5  rounded-lg hover:bg-green-600"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+
+      {/* Right Panel */}
+      <div className="w-full md:w-1/4 bg-gray-200 rounded-xl shadow-lg p-4 flex flex-col items-center gap-4">
+        <div className="text-lg font-bold text-white  border-2 p-2 rounded-md bg-blue-950">
+          Time Left : {" "}
+          <span className="ml-2 text-red-700">
+            {h}:{m}:{s}
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-6 w-full items-center mt-20">
+          <video
+            ref={userVideoRef}
+            autoPlay
+            playsInline
+            muted
+            className="w-76 h-54 object-cover rounded-lg border"
+          />
+          <video
+            src={interviewPanel} // Replace with actual interviewer video source
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-76 h-54  object-cover rounded-lg border"
+          />
+        </div>
+
+        <button
+          onClick={handleLeave}
+          className="flex items-center bg-[#c31b1b] hover:bg-[#b31616] text-white px-6 py-2 rounded-md  ">
+         
+           Submit & Leave 
+        </button>
+      </div>
+    </div>
+  );
 }
