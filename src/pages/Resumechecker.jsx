@@ -42,7 +42,7 @@ export default function ATSMainSection() {
             <img
               src={myLogo}
               alt="ATS Illustration"
-              className="w-92 drop-shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:drop-shadow-[0_10px_25px_rgba(59,130,246,0.7)]"
+              className="w-92 drop-shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:drop-shadow-[0_10px_25px_rgba(59,130,246,0.7)] animate-pulse"
             />
           </div>
         </div>

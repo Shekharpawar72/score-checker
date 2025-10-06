@@ -107,7 +107,18 @@ export default function Signin({ onToggle }) {
                 </form>
 
                 {/* OR Divider */}
-              
+                  
+
+              {/* Forgot Password */}
+          <div className="text-left mt-4">
+            <Link
+              to="/forgot-password"
+              className="text-white  hover:underline underline-offset-4 text-sm"
+            >
+              Forgot <span className="text-blue-500">Password</span> ?
+            </Link>
+          </div>
+
 
                 {/* Social */}
              

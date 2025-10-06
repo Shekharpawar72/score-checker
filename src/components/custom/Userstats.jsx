@@ -6,11 +6,11 @@ const StatsCard = ({ icon: Icon, label, value, isLast }) => {
   return (
     <div
       className={`mt-20 flex flex-col items-center justify-center 
-      bg-[#111827]/80 border border-gray-800 
+      bg-[#111827]/80 border border-gray-700
       shadow-lg hover:shadow-blue-500
       backdrop-blur-md text-white 
       rounded-xl p-6 hover:scale-105 
-      transition-all duration-300
+      transition-all duration-300   
       ${isLast ? "col-span-2 sm:col-span-1" : ""}`}
     >
       <Icon size={36} className="mb-3 text-blue-500" />
@@ -40,7 +40,7 @@ export default function UserStats() {
         and build a strong career journey.  
       </p>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 w-full max-w-5xl">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 w-full max-w-5xl  ">
         {stats.map((item, index) => (
           <StatsCard
             key={index}

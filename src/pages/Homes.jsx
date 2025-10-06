@@ -20,6 +20,7 @@ import Footer from "../components/custom/Footer";
 import { ImMoveUp } from "react-icons/im";
 import UserStats from "../components/custom/Userstats";
 import TestModeBanner from "../components/TestModeBanner";
+import Contact from "./Contact";
 
 const Homes = () => {
   const appRef = useRef(null);
@@ -129,7 +130,10 @@ const Homes = () => {
   <UserStats />
 </div>
       <Team />
-         <Faq/>
+      <Faq /> 
+      <div className="mt-20">
+      <Contact />
+      </div>
 
      <div className="mt-20"> <Footer/></div>
       

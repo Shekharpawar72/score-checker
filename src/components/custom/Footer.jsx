@@ -148,7 +148,7 @@ export default function Footer() {
               <div className="h-9 w-9 rounded-md bg-gradient-to-tr from-blue-600 to-blue-500 flex items-center justify-center text-white font-bold text-base shadow">
                 AI
               </div>
-              <span className="text-lg font-extrabold">InterviewReady-AI</span>
+              <span className="text-lg font-extrabold">Interview Edge</span>
             </a>
             <p className="text-gray-400 leading-relaxed">
               Your trusted platform for AI-powered interview prep, ATS Score Checker, and career growth.
@@ -206,7 +206,7 @@ export default function Footer() {
             <div className="mt-4">
               <h4 className="font-medium mb-2">Contact</h4>
               <ul className="space-y-1 text-gray-400">
-                <li><a href="mailto:support@aiinterview.com" className="flex items-center gap-2 hover:text-gray-200"><Mail size={14} /> support@InterviewReady.com</a></li>
+                <li><a href="mailto:support@aiinterview.com" className="flex items-center gap-2 hover:text-gray-200"><Mail size={14} /> SupportInterviewEdge@gmail.com</a></li>
                 <li><a href="#" className="hover:text-gray-200">Help Center | +91 9301163448</a></li>
                 
               </ul>

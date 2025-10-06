@@ -295,12 +295,22 @@
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
+import shekharImage from '../assets/shekhar-ceo.jpg';
+import sakshiImage from '../assets/sakshi-FE.jpg';
+import siyaImage from '../assets/siya-Tl.jpg';
+import sanskarImage from '../assets/sanskar-test.jpg';
+import sonamImage from '../assets/sonam-legals.jpg';
+
+
+
+
+
 const team = [
-  { id: 1, name: "Shekhar Barkhade", role: "Frontend Developer", image: "https://randomuser.me/api/portraits/men/32.jpg", color: "bg-[#0D1B2A]" },
-  { id: 2, name: "Sanskar c", role: "UI/UX Designer", image: "https://randomuser.me/api/portraits/men/45.jpg", color: "bg-[#0D1B2A]" },
-  { id: 3, name: "Sanjana Patel", role: "Backend Developer", image: "https://randomuser.me/api/portraits/women/56.jpg", color: "bg-[#0D1B2A]" },
-  { id: 4, name: "Sakshi  ", role: "Database Engineer", image: "https://randomuser.me/api/portraits/men/78.jpg", color: "bg-[#0D1B2A]" },
-  { id: 5, name: "Ananya Sharma", role: "Project Manager", image: "https://randomuser.me/api/portraits/women/12.jpg", color: "bg-[#0D1B2A]" },
+   { id: 1, name: "Shekhar Barkhade", role: "Frontend Developer", image: shekharImage, color: "bg-[#0D1B2A]" },
+  { id: 2, name: "Sakshi", role: "Frontend Engineer", image: sakshiImage, color: "bg-[#0D1B2A]" },
+  { id: 3, name: "Siya", role: "Team Lead", image: siyaImage, color: "bg-[#0D1B2A]" },
+  { id: 4, name: "Sanskar", role: "Database Engineer", image: sanskarImage, color: "bg-[#0D1B2A]" },
+  { id: 5, name: "Sonam", role: "Legal Advisor", image: sonamImage, color: "bg-[#0D1B2A]" },
 ];
 
 const Team3DCarousel = () => {
@@ -365,22 +375,22 @@ const Team3DCarousel = () => {
   };
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto py-10 sm:py-20 text-white font-sans">
+    <div className="relative w-full max-w-6xl mx-auto py-10 sm:py-20 text-white font-sans ">
       <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-center mb-8 sm:mb-12">
         Meet Our <span className="text-blue-500">Team</span>
       </h1>
 
-      <div className="relative flex justify-center items-center perspective-[2500px] h-[18rem] sm:h-[24rem]">
+      <div className="relative flex justify-center items-center perspective-[2500px] h-[18rem] sm:h-[24rem] ">
         {team.map((member, index) => (
           <div
             key={member.id}
-            ref={(el) => (cardsRef.current[index] = el)}
-            className={`absolute w-40 h-52 sm:w-56 sm:h-72 md:w-64 md:h-80 rounded-2xl sm:rounded-3xl flex flex-col justify-center items-center text-white bg-gradient-to-br ${member.color} p-3 sm:p-6 shadow-lg sm:shadow-2xl transform-style-preserve transition-transform duration-300 hover:scale-105`}
+            ref={(el) => (cardsRef.current[index] = el)} 
+            className={`absolute w-40 h-52 sm:w-56 sm:h-72 md:w-64 md:h-80 rounded-2xl sm:rounded-3xl flex flex-col justify-center items-center text-white bg-gradient-to-br ${member.color} p-3 sm:p-6 shadow-lg sm:shadow-2xl transform-style-preserve transition-transform duration-300 hover:scale-105  shadow-blue- `}
           >
             <img
               src={member.image}
               alt={member.name}
-              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md mb-3 sm:mb-4"
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-2xl mb-3 sm:mb-4 shadow-blue-500/50"
             />
             <h2 className="text-base sm:text-lg md:text-xl font-semibold text-center">{member.name}</h2>
             <p className="mt-1 text-xs text-blue-500 hover:shadow-blue-500 shadow-lg sm:text-sm md:text-base opacity-90 text-center">{member.role}</p>
